@@ -46,7 +46,7 @@ class TimerViewController: UIViewController {
     
     @IBAction func resetButtonTappped(_ sender: UIButton) {
         timer.invalidate()
-        seconds = 60    //Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
+        seconds = 60//Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
         timerLabel.text = timeString(time: TimeInterval(seconds))
         isTimerRunning = false
         startButton.isEnabled = true
@@ -57,9 +57,21 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
     
+    func alertMessage() {
+        let alert = UIAlertController(title: "Study Session Complete!", message: "Now take a five minute break.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay :)", style: .cancel, handler: nil))
+             self.present(alert, animated: true)
+        
+    }
+    
+    
+    
+    
     @objc func updateTimer() {
         if seconds < 1 {
-            timer.invalidate() //send alert to indicate that time is up
+            timer.invalidate()
+            alertMessage()
+       //send alert to indicate that time is up
         } else {
             seconds -= 1     //This will decrement(count down)the seconds.
             timerLabel.text = timeString(time: TimeInterval(seconds))
@@ -80,3 +92,5 @@ class TimerViewController: UIViewController {
     }
     
 }
+
+
